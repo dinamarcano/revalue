@@ -8,12 +8,11 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [company, setCompany] = useState("");
-  const [location, setLocation] = useState("");
+  const [ubication, setUbication] = useState("");
   const [error, setError] = useState("");
 
   const handleSignup = () => {
-    // VALIDACIONES
-    if (!email || !password || !repeatPassword || !company || !location) {
+    if (!email || !password || !repeatPassword || !company || !ubication) {
       setError("Please fill all fields");
       return;
     }
@@ -28,80 +27,98 @@ export default function Signup() {
       return;
     }
 
-    // GUARDAR EN LOCALSTORAGE
-    const user = { email, password, company, location };
+    const user = {
+      email,
+      password,
+      company,
+      ubication,
+    };
+
     localStorage.setItem("user", JSON.stringify(user));
 
-    alert("Account created successfully ✅");
-    navigate("/");
+    setError("");
+    alert("Registration successful ✅");
+
+    navigate("/login");
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-white px-6">
+    <div className="flex justify-center items-center min-h-screen bg-white px-6">
 
-      {/* BACK */}
-      <div className="absolute top-6 left-6">
-        <div
-          onClick={() => navigate("/")}
-          className="w-12 h-12 border border-[#2DCC70] rounded-full flex items-center justify-center text-[#2DCC70] text-xl cursor-pointer"
-        >
+      {/* BACK BUTTON */}
+      <div
+        className="fixed top-4 left-4 md:top-6 md:left-6"
+        onClick={() => navigate("/login")}
+      >
+        <div className="w-10 h-10 md:w-12 md:h-12 border border-[#2DCC70] rounded-full flex items-center justify-center text-[#2DCC70] text-lg md:text-xl cursor-pointer">
           ←
         </div>
       </div>
 
-      <img src="/logo.png" className="w-36 mb-3" />
+      {/* CONTENIDO */}
+      <div className="w-full max-w-sm flex flex-col items-center">
 
-      <h1 className="text-[#2DCC70] text-4xl font-bold mb-6">
-        Create Your Account
-      </h1>
+        {/* LOGO */}
+        <img
+          src="/logo.png"
+          className="w-24 md:w-36 mb-2 md:mb-4"
+        />
 
-      {/* ERROR */}
-      {error && (
-        <p className="text-red-500 mb-4 text-sm">{error}</p>
-      )}
+        {/* TITLE */}
+        <h1 className="text-[#2DCC70] text-2xl md:text-4xl font-bold mb-6 md:mb-8 text-center">
+          Create Your Account
+        </h1>
 
-      <input
-        type="email"
-        placeholder="Email address"
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full max-w-sm p-5 mb-4 rounded-2xl bg-[#F2F3F7] outline-none"
-      />
+        {/* ERROR */}
+        {error && (
+          <p className="text-red-500 mb-4 text-sm">{error}</p>
+        )}
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full max-w-sm p-5 mb-4 rounded-2xl bg-[#F2F3F7] outline-none"
-      />
+        {/* INPUTS */}
+        <input
+          type="email"
+          placeholder="Email address"
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-4 md:p-5 mb-3 md:mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+        />
 
-      <input
-        type="password"
-        placeholder="Repeat Password"
-        onChange={(e) => setRepeatPassword(e.target.value)}
-        className="w-full max-w-sm p-5 mb-4 rounded-2xl bg-[#F2F3F7] outline-none"
-      />
+        <input
+          type="password"
+          placeholder="Password"
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-4 md:p-5 mb-3 md:mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+        />
 
-      <input
-        type="text"
-        placeholder="Company Name"
-        onChange={(e) => setCompany(e.target.value)}
-        className="w-full max-w-sm p-5 mb-4 rounded-2xl bg-[#F2F3F7] outline-none"
-      />
+        <input
+          type="password"
+          placeholder="Repeat Password"
+          onChange={(e) => setRepeatPassword(e.target.value)}
+          className="w-full p-4 md:p-5 mb-3 md:mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+        />
 
-      <input
-        type="text"
-        placeholder="Location"
-        onChange={(e) => setLocation(e.target.value)}
-        className="w-full max-w-sm p-5 mb-6 rounded-2xl bg-[#F2F3F7] outline-none"
-      />
+        <input
+          type="text"
+          placeholder="Company Name"
+          onChange={(e) => setCompany(e.target.value)}
+          className="w-full p-4 md:p-5 mb-3 md:mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+        />
 
-      <button
-        onClick={handleSignup}
-        className="w-full max-w-sm py-5 rounded-full bg-[#2DCC70] text-white text-lg"
-      >
-        Sign up
-      </button>
+        <input
+          type="text"
+          placeholder="Ubication"
+          onChange={(e) => setUbication(e.target.value)}
+          className="w-full p-4 md:p-5 mb-5 md:mb-6 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+        />
 
+        {/* BUTTON */}
+        <button
+          onClick={handleSignup}
+          className="w-full py-4 md:py-5 rounded-full bg-[#2DCC70] text-white text-base md:text-lg font-medium"
+        >
+          Sign up
+        </button>
+
+      </div>
     </div>
   );
 }
