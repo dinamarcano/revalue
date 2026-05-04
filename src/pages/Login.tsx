@@ -39,8 +39,11 @@ export default function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-white px-6">
 
-      {/* BACK BUTTON (AHORA GLOBAL) */}
-      <div className="fixed top-6 left-6">
+      {/* BACK BUTTON (AHORA VA A CHOOSE TYPE) */}
+      <div
+        className="fixed top-6 left-6"
+        onClick={() => navigate("/choose-type")}
+      >
         <div className="w-12 h-12 border border-[#2DCC70] rounded-full flex items-center justify-center text-[#2DCC70] text-xl cursor-pointer">
           ←
         </div>
