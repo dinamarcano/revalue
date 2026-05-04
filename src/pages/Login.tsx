@@ -1,7 +1,44 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Login() {
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    // VALIDACIÓN CAMPOS VACÍOS
+    if (!email || !password) {
+      setError("Please fill all fields");
+      return;
+    }
+
+    // VALIDACIÓN EMAIL
+    if (!email.includes("@")) {
+      setError("Invalid email");
+      return;
+    }
+
+    const savedUser = localStorage.getItem("user");
+
+    // SI NO EXISTE USUARIO
+    if (!savedUser) {
+      setError("No account found");
+      return;
+    }
+
+    const user = JSON.parse(savedUser);
+
+    // VALIDACIÓN LOGIN
+    if (email === user.email && password === user.password) {
+      setError("");
+      alert("Login successful ✅");
+    } else {
+      setError("Incorrect email or password");
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen bg-white px-6">
@@ -21,10 +58,16 @@ export default function Login() {
         Welcome Back
       </h1>
 
+      {/* ERROR */}
+      {error && (
+        <p className="text-red-500 mb-4 text-sm">{error}</p>
+      )}
+
       {/* INPUT EMAIL */}
       <input
         type="email"
         placeholder="Email address"
+        onChange={(e) => setEmail(e.target.value)}
         className="w-full max-w-sm p-5 mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
       />
 
@@ -32,11 +75,15 @@ export default function Login() {
       <input
         type="password"
         placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
         className="w-full max-w-sm p-5 mb-6 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
       />
 
       {/* BUTTON */}
-      <button className="w-full max-w-sm py-5 rounded-full bg-[#2DCC70] text-white text-lg font-medium">
+      <button
+        onClick={handleLogin}
+        className="w-full max-w-sm py-5 rounded-full bg-[#2DCC70] text-white text-lg font-medium"
+      >
         Sign in
       </button>
 
