@@ -30,7 +30,11 @@ export default function Login() {
 
     if (email === user.email && password === user.password) {
       setError("");
+
       alert("Login successful ✅");
+
+      // IR AL HOME
+      navigate("/home");
     } else {
       setError("Incorrect email or password");
     }
@@ -39,9 +43,9 @@ export default function Login() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-white px-6">
 
-      {/* BACK BUTTON (AHORA VA A CHOOSE TYPE) */}
+      {/* BACK BUTTON */}
       <div
-        className="fixed top-6 left-6"
+        className="fixed top-6 left-6 z-20"
         onClick={() => navigate("/choose-type")}
       >
         <div className="w-12 h-12 border border-[#2DCC70] rounded-full flex items-center justify-center text-[#2DCC70] text-xl cursor-pointer">
@@ -53,38 +57,43 @@ export default function Login() {
       <div className="w-full max-w-sm flex flex-col items-center">
 
         {/* LOGO */}
-        <img src="/logo.png" className="w-36 mb-4" />
+        <img
+          src="/logo.png"
+          className="w-28 md:w-36 mb-4"
+        />
 
         {/* TITLE */}
-        <h1 className="text-[#2DCC70] text-4xl font-bold mb-8">
+        <h1 className="text-[#2DCC70] text-3xl md:text-4xl font-bold mb-8 text-center">
           Welcome Back
         </h1>
 
         {/* ERROR */}
         {error && (
-          <p className="text-red-500 mb-4 text-sm">{error}</p>
+          <p className="text-red-500 mb-4 text-sm text-center">
+            {error}
+          </p>
         )}
 
-        {/* INPUT EMAIL */}
+        {/* EMAIL */}
         <input
           type="email"
           placeholder="Email address"
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-5 mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+          className="w-full p-4 md:p-5 mb-4 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
         />
 
-        {/* INPUT PASSWORD */}
+        {/* PASSWORD */}
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full p-5 mb-6 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
+          className="w-full p-4 md:p-5 mb-6 rounded-2xl bg-[#F2F3F7] placeholder:text-[#A1A4B2] outline-none"
         />
 
         {/* BUTTON */}
         <button
           onClick={handleLogin}
-          className="w-full py-5 rounded-full bg-[#2DCC70] text-white text-lg font-medium"
+          className="w-full py-4 md:py-5 rounded-full bg-[#2DCC70] text-white text-base md:text-lg font-medium"
         >
           Sign in
         </button>
@@ -94,7 +103,7 @@ export default function Login() {
           Forgot your password?
         </p>
 
-        <p className="text-[#A1A4B2] mt-2 text-sm">
+        <p className="text-[#A1A4B2] mt-2 text-sm text-center">
           Don’t have an account?{" "}
           <span
             className="text-[#2DCC70] cursor-pointer"

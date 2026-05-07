@@ -2,22 +2,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ChooseType from "./pages/ChooseType";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-
-        {/* PANTALLA INICIAL */}
         <Route path="/" element={<ChooseType />} />
+        <Route path="/choose-type" element={<ChooseType />} />
 
-        {/* AUTH */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* CHOOSE TYPE */}
-        <Route path="/choose-type" element={<ChooseType />} />
-
+        <Route path="/home" element={<Home />} />
       </Routes>
     </BrowserRouter>
   );
