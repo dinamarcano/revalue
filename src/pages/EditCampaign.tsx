@@ -3,15 +3,99 @@ import { useState } from "react";
 
 import CampaignCard from "../components/CampaignCard";
 import BottomNav from "../components/BottomNav";
+import MachineMap from "../components/MachineMap";
+
+interface Campaign {
+  status: "ON" | "OFF";
+  image: string;
+  title: string;
+  reward: string;
+  machineAddress: string;
+  background: string;
+  textColor: string;
+}
 
 export default function EditCampaign() {
   const navigate = useNavigate();
 
-  const [campaignOne, setCampaignOne] = useState<"ON" | "OFF">("ON");
-  const [campaignTwo, setCampaignTwo] = useState<"ON" | "OFF">("OFF");
+  const [campaigns, setCampaigns] = useState<Campaign[]>([
+    {
+      status: "ON",
+      image: "/campaign.png",
+      title: "Recycle 15 bottles today",
+      reward: "EARN 15 POINTS",
+      machineAddress: "09th Street #21-2",
+      background: "#2DCC70",
+      textColor: "text-white",
+    },
+    {
+      status: "OFF",
+      image: "/Group 37014.png",
+      title: "Recycle 12 bottles today",
+      reward: "EARN 15% DISCOUNT",
+      machineAddress: "Green Avenue #14-8",
+      background: "#FFFBBC",
+      textColor: "text-black",
+    },
+  ]);
+
+  const handleToggle = (indexToToggle: number) => {
+    const updatedCampaigns = [...campaigns];
+
+    updatedCampaigns[indexToToggle].status =
+      updatedCampaigns[indexToToggle].status === "ON"
+        ? "OFF"
+        : "ON";
+
+    setCampaigns(updatedCampaigns);
+  };
+
+  const handleDelete = (indexToDelete: number) => {
+    setCampaigns((prev) =>
+      prev.filter((_, index) => index !== indexToDelete)
+    );
+  };
+
+  const handleEdit = (indexToEdit: number) => {
+    const campaign = campaigns[indexToEdit];
+
+    const newReward = prompt(
+      "Edit reward title",
+      campaign.reward
+    );
+
+    const newTitle = prompt(
+      "Edit recycle goal",
+      campaign.title
+    );
+
+    const newMachine = prompt(
+      "Edit machine address",
+      campaign.machineAddress
+    );
+
+    if (
+      !newReward ||
+      !newTitle ||
+      !newMachine
+    ) {
+      return;
+    }
+
+    const updatedCampaigns = [...campaigns];
+
+    updatedCampaigns[indexToEdit] = {
+      ...campaign,
+      reward: newReward,
+      title: newTitle,
+      machineAddress: newMachine,
+    };
+
+    setCampaigns(updatedCampaigns);
+  };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] flex justify-center pb-28">
+    <div className="min-h-screen bg-[#F5F5F5] flex justify-center pb-28 overflow-x-hidden">
 
       {/* CONTAINER */}
       <div className="w-full max-w-[1200px] px-4 md:px-10 py-6 md:py-10">
@@ -53,60 +137,62 @@ export default function EditCampaign() {
         {/* TITLE */}
         <h1
           className="
-            text-5xl
+            text-3xl
+            sm:text-4xl
             md:text-7xl
             font-bold
             text-black
             mb-8
-            md:mb-10
             leading-none
           "
         >
           My campaigns
         </h1>
 
-        {/* FIRST CAMPAIGN */}
-        <div className="mb-8">
+        {/* MAP */}
+        <MachineMap
+          machines={[
+            {
+              address: "09th Street #21-2",
+              position: [40.7128, -74.006],
+            },
+            {
+              address: "Green Avenue #14-8",
+              position: [40.7228, -74.001],
+            },
+            {
+              address: "Palm Street #7-11",
+              position: [40.7328, -74.012],
+            },
+          ]}
+        />
 
-          <CampaignCard
-            status={campaignOne}
-            image="/campaign.png"
-            title="Recycle 15 bottles today"
-            reward="EARN 15 POINTS"
-            background="#2DCC70"
-            textColor="text-white"
-            onToggle={() =>
-              setCampaignOne(
-                campaignOne === "ON" ? "OFF" : "ON"
-              )
-            }
-          />
+        {/* CAMPAIGNS */}
+        <div className="flex flex-col gap-8 mb-12">
 
-        </div>
-
-        {/* SECOND CAMPAIGN */}
-        <div className="mb-12">
-
-          <CampaignCard
-            status={campaignTwo}
-            image="/Group 37014.png"
-            title="Recycle 12 bottles today"
-            reward="EARN 15% DISCOUNT"
-            background="#FFFBBC"
-            textColor="text-black"
-            onToggle={() =>
-              setCampaignTwo(
-                campaignTwo === "ON" ? "OFF" : "ON"
-              )
-            }
-          />
+          {campaigns.map((campaign, index) => (
+            <CampaignCard
+              key={index}
+              status={campaign.status}
+              image={campaign.image}
+              title={campaign.title}
+              reward={campaign.reward}
+              machineAddress={campaign.machineAddress}
+              background={campaign.background}
+              textColor={campaign.textColor}
+              onToggle={() => handleToggle(index)}
+              onEdit={() => handleEdit(index)}
+              onDelete={() => handleDelete(index)}
+            />
+          ))}
 
         </div>
 
         {/* CREATE TITLE */}
         <h1
           className="
-            text-4xl
+            text-3xl
+            sm:text-4xl
             md:text-6xl
             font-bold
             text-black

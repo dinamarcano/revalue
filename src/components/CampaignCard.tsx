@@ -3,9 +3,12 @@ interface CampaignCardProps {
   image: string;
   title: string;
   reward: string;
+  machineAddress: string;
   background: string;
   textColor?: string;
   onToggle: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
 }
 
 export default function CampaignCard({
@@ -13,9 +16,12 @@ export default function CampaignCard({
   image,
   title,
   reward,
+  machineAddress,
   background,
   textColor = "text-black",
   onToggle,
+  onEdit,
+  onDelete,
 }: CampaignCardProps) {
   return (
     <div className="bg-white rounded-[35px] shadow-md overflow-hidden">
@@ -70,7 +76,7 @@ export default function CampaignCard({
             <img
               src={image}
               className="
-                w-[230px]
+                w-[180px]
                 md:w-[420px]
                 object-contain
                 select-none
@@ -100,12 +106,14 @@ export default function CampaignCard({
             </h2>
 
           </div>
+
         </div>
       </div>
 
       {/* BOTTOM */}
       <div className="px-5 py-4 md:px-8 md:py-6">
 
+        {/* TITLE */}
         <h3
           className="
             text-xl
@@ -113,12 +121,65 @@ export default function CampaignCard({
             font-medium
             leading-tight
             text-black
+            mb-3
           "
         >
           {title}
         </h3>
 
+        {/* MACHINE */}
+        <p
+          className="
+            text-sm
+            md:text-xl
+            text-[#777]
+            mb-5
+          "
+        >
+          📍 {machineAddress}
+        </p>
+
+        {/* ACTIONS */}
+        <div className="flex gap-3">
+
+          {/* EDIT */}
+          <button
+            onClick={onEdit}
+            className="
+              flex-1
+              py-3
+              rounded-2xl
+              bg-[#2DCC70]
+              text-white
+              font-semibold
+              text-sm
+              md:text-lg
+              transition
+              hover:scale-[1.02]
+            "
+          >
+            Edit
+          </button>
+
+          {/* DELETE */}
+          <button
+            onClick={onDelete}
+            className="
+              px-5
+              rounded-2xl
+              bg-[#FFE5E5]
+              text-xl
+              transition
+              hover:scale-105
+            "
+          >
+            🗑️
+          </button>
+
+        </div>
+
       </div>
+
     </div>
   );
 }
