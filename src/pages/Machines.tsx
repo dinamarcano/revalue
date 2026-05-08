@@ -16,23 +16,37 @@ export default function Machines() {
 
   const [showModal, setShowModal] = useState(false);
 
-  const [machines, setMachines] = useState<Machine[]>([
-    {
-      bottles: 18,
-      address: "09th Street #21-2",
-      activity: "Very high activity",
-    },
-    {
-      bottles: 9,
-      address: "Green Avenue #14-8",
-      activity: "Medium activity",
-    },
-    {
-      bottles: 5,
-      address: "Palm Street #7-11",
-      activity: "Low activity",
-    },
-  ]);
+  const [machines, setMachines] = useState<Machine[]>(() => {
+    const savedMachines =
+      localStorage.getItem("machines");
+
+    if (savedMachines) {
+      return JSON.parse(savedMachines);
+    }
+
+    return [
+      {
+        bottles: 18,
+        address: "09th Street #21-2",
+        activity: "Very high activity",
+      },
+      {
+        bottles: 9,
+        address: "Green Avenue #14-8",
+        activity: "Medium activity",
+      },
+      {
+        bottles: 5,
+        address: "Palm Street #7-11",
+        activity: "Low activity",
+      },
+    ];
+  });
+
+  localStorage.setItem(
+    "machines",
+    JSON.stringify(machines)
+  );
 
   const totalForDay = machines.reduce(
     (total, machine) => total + machine.bottles,
@@ -45,13 +59,19 @@ export default function Machines() {
     setMachines((prev) => [...prev, machine]);
   };
 
-  const handleDeleteMachine = (indexToDelete: number) => {
+  const handleDeleteMachine = (
+    indexToDelete: number
+  ) => {
     setMachines((prev) =>
-      prev.filter((_, index) => index !== indexToDelete)
+      prev.filter(
+        (_, index) => index !== indexToDelete
+      )
     );
   };
 
-  const handleEditMachine = (indexToEdit: number) => {
+  const handleEditMachine = (
+    indexToEdit: number
+  ) => {
     const machine = machines[indexToEdit];
 
     const newBottles = prompt(

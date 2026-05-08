@@ -18,28 +18,44 @@ interface Campaign {
 export default function EditCampaign() {
   const navigate = useNavigate();
 
-  const [campaigns, setCampaigns] = useState<Campaign[]>([
-    {
-      status: "ON",
-      image: "/campaign.png",
-      title: "Recycle 15 bottles today",
-      reward: "EARN 15 POINTS",
-      machineAddress: "09th Street #21-2",
-      background: "#2DCC70",
-      textColor: "text-white",
-    },
-    {
-      status: "OFF",
-      image: "/Group 37014.png",
-      title: "Recycle 12 bottles today",
-      reward: "EARN 15% DISCOUNT",
-      machineAddress: "Green Avenue #14-8",
-      background: "#FFFBBC",
-      textColor: "text-black",
-    },
-  ]);
+  const [campaigns, setCampaigns] = useState<Campaign[]>(() => {
+    const savedCampaigns =
+      localStorage.getItem("campaigns");
 
-  const handleToggle = (indexToToggle: number) => {
+    if (savedCampaigns) {
+      return JSON.parse(savedCampaigns);
+    }
+
+    return [
+      {
+        status: "ON",
+        image: "/campaign.png",
+        title: "Recycle 15 bottles today",
+        reward: "EARN 15 POINTS",
+        machineAddress: "09th Street #21-2",
+        background: "#2DCC70",
+        textColor: "text-white",
+      },
+      {
+        status: "OFF",
+        image: "/Group 37014.png",
+        title: "Recycle 12 bottles today",
+        reward: "EARN 15% DISCOUNT",
+        machineAddress: "Green Avenue #14-8",
+        background: "#FFFBBC",
+        textColor: "text-black",
+      },
+    ];
+  });
+
+  localStorage.setItem(
+    "campaigns",
+    JSON.stringify(campaigns)
+  );
+
+  const handleToggle = (
+    indexToToggle: number
+  ) => {
     const updatedCampaigns = [...campaigns];
 
     updatedCampaigns[indexToToggle].status =
@@ -50,13 +66,19 @@ export default function EditCampaign() {
     setCampaigns(updatedCampaigns);
   };
 
-  const handleDelete = (indexToDelete: number) => {
+  const handleDelete = (
+    indexToDelete: number
+  ) => {
     setCampaigns((prev) =>
-      prev.filter((_, index) => index !== indexToDelete)
+      prev.filter(
+        (_, index) => index !== indexToDelete
+      )
     );
   };
 
-  const handleEdit = (indexToEdit: number) => {
+  const handleEdit = (
+    indexToEdit: number
+  ) => {
     const campaign = campaigns[indexToEdit];
 
     const newReward = prompt(
@@ -93,6 +115,22 @@ export default function EditCampaign() {
 
     setCampaigns(updatedCampaigns);
   };
+
+  const savedMachines = JSON.parse(
+    localStorage.getItem("machines") || "[]"
+  );
+
+  const mapMachines = savedMachines.map(
+    (machine: {
+      address: string;
+    }, index: number) => ({
+      address: machine.address,
+      position: [
+        40.7128 + index * 0.01,
+        -74.006 + index * 0.01,
+      ] as [number, number],
+    })
+  );
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] flex justify-center pb-28 overflow-x-hidden">
@@ -150,22 +188,7 @@ export default function EditCampaign() {
         </h1>
 
         {/* MAP */}
-        <MachineMap
-          machines={[
-            {
-              address: "09th Street #21-2",
-              position: [40.7128, -74.006],
-            },
-            {
-              address: "Green Avenue #14-8",
-              position: [40.7228, -74.001],
-            },
-            {
-              address: "Palm Street #7-11",
-              position: [40.7328, -74.012],
-            },
-          ]}
-        />
+        <MachineMap machines={mapMachines} />
 
         {/* CAMPAIGNS */}
         <div className="flex flex-col gap-8 mb-12">
@@ -180,9 +203,15 @@ export default function EditCampaign() {
               machineAddress={campaign.machineAddress}
               background={campaign.background}
               textColor={campaign.textColor}
-              onToggle={() => handleToggle(index)}
-              onEdit={() => handleEdit(index)}
-              onDelete={() => handleDelete(index)}
+              onToggle={() =>
+                handleToggle(index)
+              }
+              onEdit={() =>
+                handleEdit(index)
+              }
+              onDelete={() =>
+                handleDelete(index)
+              }
             />
           ))}
 
@@ -205,7 +234,9 @@ export default function EditCampaign() {
 
         {/* CREATE CARD */}
         <button
-          onClick={() => navigate("/create-campaign")}
+          onClick={() =>
+            navigate("/create-campaign")
+          }
           className="
             w-full
             rounded-[35px]

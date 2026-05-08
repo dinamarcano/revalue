@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import ChooseType from "./pages/ChooseType";
 import Home from "./pages/Home";
 import EditCampaign from "./pages/EditCampaign";
+import CreateCampaign from "./pages/CreateCampaign";
 import Profile from "./pages/Profile";
 import Machines from "./pages/Machines";
 
@@ -26,6 +27,12 @@ function App() {
 
         {/* EDIT CAMPAIGN */}
         <Route path="/edit" element={<EditCampaign />} />
+
+        {/* CREATE CAMPAIGN */}
+        <Route
+          path="/create-campaign"
+          element={<CreateCampaign />}
+        />
 
         {/* PROFILE */}
         <Route path="/profile" element={<Profile />} />

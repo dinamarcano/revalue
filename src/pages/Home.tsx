@@ -122,7 +122,7 @@ export default function Home() {
           className="w-full bg-white rounded-[35px] shadow-md overflow-hidden"
         >
           <img
-            src="/machine.png"
+            src="/machines3.png"
             className="w-full h-[240px] md:h-[420px] object-cover hover:scale-[1.02] transition duration-300"
           />
         </button>
