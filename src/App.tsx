@@ -6,6 +6,7 @@ import ChooseType from "./pages/ChooseType";
 import Home from "./pages/Home";
 import EditCampaign from "./pages/EditCampaign";
 import Profile from "./pages/Profile";
+import Machines from "./pages/Machines";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
 
         {/* PROFILE */}
         <Route path="/profile" element={<Profile />} />
+
+        {/* MACHINES */}
+        <Route path="/machines" element={<Machines />} />
 
       </Routes>
     </BrowserRouter>
