@@ -2,12 +2,16 @@ interface MachineCardProps {
   bottles: number;
   address: string;
   activity: string;
+  onDelete: () => void;
+  onEdit: () => void;
 }
 
 export default function MachineCard({
   bottles,
   address,
   activity,
+  onDelete,
+  onEdit,
 }: MachineCardProps) {
   return (
     <div
@@ -19,69 +23,127 @@ export default function MachineCard({
         md:p-6
         flex
         items-center
-        gap-5
+        justify-between
+        gap-4
+        overflow-hidden
       "
     >
 
-      {/* GREEN BOX */}
-      <div
-        className="
-          min-w-[110px]
-          h-[110px]
-          md:min-w-[160px]
-          md:h-[160px]
-          rounded-[28px]
-          bg-[#2DCC70]
-          flex
-          items-center
-          justify-center
-          shadow-md
-        "
-      >
+      {/* LEFT SIDE */}
+      <div className="flex items-center gap-4 flex-1 overflow-hidden">
 
-        <h1
+        {/* GREEN BOX */}
+        <div
           className="
-            text-white
-            text-5xl
-            md:text-7xl
-            font-bold
-            leading-none
+            w-[90px]
+            h-[90px]
+            md:w-[160px]
+            md:h-[160px]
+            rounded-[24px]
+            bg-[#2DCC70]
+            flex
+            items-center
+            justify-center
+            shadow-md
+            flex-shrink-0
           "
         >
-          {bottles}
-        </h1>
+
+          <h1
+            className="
+              text-white
+              text-4xl
+              md:text-7xl
+              font-bold
+              leading-none
+            "
+          >
+            {bottles}
+          </h1>
+
+        </div>
+
+        {/* INFO */}
+        <div className="overflow-hidden">
+
+          {/* ADDRESS */}
+          <h2
+            className="
+              text-base
+              md:text-5xl
+              font-semibold
+              text-black
+              leading-tight
+              mb-1
+              truncate
+            "
+          >
+            {address}
+          </h2>
+
+          {/* ACTIVITY */}
+          <p
+            className="
+              text-sm
+              md:text-4xl
+              font-medium
+              text-black
+              leading-tight
+            "
+          >
+            {activity}
+          </p>
+
+        </div>
 
       </div>
 
-      {/* INFO */}
-      <div className="flex flex-col justify-center">
+      {/* ACTIONS */}
+      <div className="flex flex-col gap-2 flex-shrink-0">
 
-        {/* ADDRESS */}
-        <h2
+        {/* EDIT */}
+        <button
+          onClick={onEdit}
           className="
-            text-2xl
-            md:text-5xl
-            font-semibold
-            text-black
-            leading-tight
-            mb-2
+            w-9
+            h-9
+            md:w-14
+            md:h-14
+            rounded-full
+            bg-[#F2F3F7]
+            flex
+            items-center
+            justify-center
+            text-base
+            md:text-2xl
+            transition
+            hover:scale-105
           "
         >
-          {address}
-        </h2>
+          ✏️
+        </button>
 
-        {/* ACTIVITY */}
-        <p
+        {/* DELETE */}
+        <button
+          onClick={onDelete}
           className="
-            text-xl
-            md:text-4xl
-            font-medium
-            text-black
-            leading-tight
+            w-9
+            h-9
+            md:w-14
+            md:h-14
+            rounded-full
+            bg-[#FFE5E5]
+            flex
+            items-center
+            justify-center
+            text-base
+            md:text-2xl
+            transition
+            hover:scale-105
           "
         >
-          {activity}
-        </p>
+          🗑️
+        </button>
 
       </div>
 

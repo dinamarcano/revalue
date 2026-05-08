@@ -74,7 +74,7 @@ export default function Profile() {
 
           {/* BACK */}
           <button
-            onClick={() => navigate("/home")}
+            onClick={() => navigate(-1)}
             className="text-[#2DCC70] text-base md:text-lg"
           >
             ← Back

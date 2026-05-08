@@ -45,8 +45,51 @@ export default function Machines() {
     setMachines((prev) => [...prev, machine]);
   };
 
+  const handleDeleteMachine = (indexToDelete: number) => {
+    setMachines((prev) =>
+      prev.filter((_, index) => index !== indexToDelete)
+    );
+  };
+
+  const handleEditMachine = (indexToEdit: number) => {
+    const machine = machines[indexToEdit];
+
+    const newBottles = prompt(
+      "Edit bottles recycled",
+      machine.bottles.toString()
+    );
+
+    const newAddress = prompt(
+      "Edit address",
+      machine.address
+    );
+
+    const newActivity = prompt(
+      "Edit activity",
+      machine.activity
+    );
+
+    if (
+      !newBottles ||
+      !newAddress ||
+      !newActivity
+    ) {
+      return;
+    }
+
+    const updatedMachines = [...machines];
+
+    updatedMachines[indexToEdit] = {
+      bottles: Number(newBottles),
+      address: newAddress,
+      activity: newActivity,
+    };
+
+    setMachines(updatedMachines);
+  };
+
   return (
-    <div className="min-h-screen bg-[#F5F5F5] flex justify-center pb-28">
+    <div className="min-h-screen bg-[#F5F5F5] flex justify-center pb-28 overflow-x-hidden">
 
       {/* CONTAINER */}
       <div className="w-full max-w-[1200px] px-4 md:px-10 py-6 md:py-10">
@@ -56,7 +99,7 @@ export default function Machines() {
 
           {/* BACK */}
           <button
-            onClick={() => navigate("/home")}
+            onClick={() => navigate(-1)}
             className="text-[#2DCC70] text-base md:text-lg"
           >
             ← Back
@@ -88,7 +131,8 @@ export default function Machines() {
         {/* TITLE */}
         <h1
           className="
-            text-5xl
+            text-3xl
+            sm:text-4xl
             md:text-7xl
             font-bold
             text-black
@@ -114,7 +158,8 @@ export default function Machines() {
             src="/machine2.png"
             className="
               w-full
-              h-[160px]
+              h-[140px]
+              sm:h-[180px]
               md:h-[300px]
               object-cover
             "
@@ -131,19 +176,20 @@ export default function Machines() {
               bg-white
               rounded-[35px]
               shadow-md
-              p-6
+              p-5
               md:p-8
               text-center
             "
           >
 
-            <p className="text-xl md:text-2xl mb-3">
+            <p className="text-lg md:text-2xl mb-3">
               Total for the week
             </p>
 
             <h2
               className="
-                text-6xl
+                text-4xl
+                sm:text-5xl
                 md:text-7xl
                 font-bold
                 leading-none
@@ -153,7 +199,7 @@ export default function Machines() {
               {totalForWeek}
             </h2>
 
-            <p className="text-xl md:text-2xl font-semibold">
+            <p className="text-lg md:text-2xl font-semibold">
               <span className="text-[#2DCC70]">
                 Recycled
               </span>{" "}
@@ -168,19 +214,20 @@ export default function Machines() {
               bg-white
               rounded-[35px]
               shadow-md
-              p-6
+              p-5
               md:p-8
               text-center
             "
           >
 
-            <p className="text-xl md:text-2xl mb-3">
+            <p className="text-lg md:text-2xl mb-3">
               Total for the day
             </p>
 
             <h2
               className="
-                text-6xl
+                text-4xl
+                sm:text-5xl
                 md:text-7xl
                 font-bold
                 leading-none
@@ -190,7 +237,7 @@ export default function Machines() {
               {totalForDay}
             </h2>
 
-            <p className="text-xl md:text-2xl font-semibold">
+            <p className="text-lg md:text-2xl font-semibold">
               <span className="text-[#2DCC70]">
                 Recycled
               </span>{" "}
@@ -207,11 +254,12 @@ export default function Machines() {
           className="
             w-full
             mb-8
-            py-5
+            py-4
+            md:py-5
             rounded-[28px]
             bg-[#2DCC70]
             text-white
-            text-2xl
+            text-xl
             md:text-3xl
             font-bold
             transition
@@ -230,6 +278,12 @@ export default function Machines() {
               bottles={machine.bottles}
               address={machine.address}
               activity={machine.activity}
+              onDelete={() =>
+                handleDeleteMachine(index)
+              }
+              onEdit={() =>
+                handleEditMachine(index)
+              }
             />
           ))}
 
