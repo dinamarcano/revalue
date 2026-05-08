@@ -5,6 +5,7 @@ import Signup from "./pages/Signup";
 import ChooseType from "./pages/ChooseType";
 import Home from "./pages/Home";
 import EditCampaign from "./pages/EditCampaign";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
 
         {/* EDIT CAMPAIGN */}
         <Route path="/edit" element={<EditCampaign />} />
+
+        {/* PROFILE */}
+        <Route path="/profile" element={<Profile />} />
 
       </Routes>
     </BrowserRouter>
