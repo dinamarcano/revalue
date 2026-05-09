@@ -27,14 +27,20 @@ Revalue/
 ├── src/
 │   ├── assets/                # Recursos gráficos y multimedia
 │   ├── components/            # Componentes reutilizables
+│   ├── context/               # Context API y manejo global de estado
+│   ├── hooks/                 # Custom hooks reutilizables
+│   ├── lib/                   # Configuración de librerías externas
 │   ├── pages/                 # Pantallas principales de la aplicación
+│   ├── providers/             # Providers globales
 │   ├── services/              # Manejo de datos y lógica externa
-│   ├── utils/                 # Funciones auxiliares
-│   ├── types/                 # Tipados y definiciones TypeScript
 │   ├── styles/                # Estilos globales y configuraciones
+│   ├── types/                 # Tipados y definiciones TypeScript
+│   ├── utils/                 # Funciones auxiliares
 │   ├── App.tsx                # Configuración de rutas
-│   └── main.tsx               # Punto de entrada principal
+│   ├── main.tsx               # Punto de entrada principal
+│   └── index.css              # Estilos globales
 │
+├── .env.example               # Variables de entorno de ejemplo
 ├── .gitignore
 ├── eslint.config.js
 ├── package.json
