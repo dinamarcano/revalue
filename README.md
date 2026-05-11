@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# 🌱 Revalue
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Revalue es una plataforma interactiva enfocada en incentivar el reciclaje mediante campañas, recompensas y máquinas inteligentes de reciclaje.
 
-Currently, two official plugins are available:
+La aplicación permite que marcas o aliados creen campañas sostenibles conectadas a máquinas de reciclaje ubicadas en diferentes puntos de la ciudad, incentivando a los usuarios a reciclar botellas a cambio de beneficios, descuentos o puntos.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+✨ Funcionalidades actuales
+🔐 Inicio de sesión y registro de usuarios
+👤 Perfil editable para aliados/marcas
+🏢 Gestión de información de empresa y ubicación
+♻️ Administración de máquinas de reciclaje
+➕ Crear nuevas máquinas
+✏️ Editar y eliminar máquinas
+📍 Visualización de máquinas en mapa interactivo
+🎯 Creación de campañas sostenibles
+🖼️ Subida de imágenes para campañas
+🎨 Personalización de colores de campañas
+🔄 Activar o desactivar campañas
+💾 Persistencia de datos usando LocalStorage
 
-## React Compiler
+# 🧠 Estructura del Proyecto (Scaffolding)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+Revalue/
+├── public/                    # Recursos públicos e imágenes
+│
+├── src/
+│   ├── assets/                # Recursos gráficos y multimedia
+│   ├── components/            # Componentes reutilizables
+│   ├── context/               # Context API y manejo global de estado
+│   ├── hooks/                 # Custom hooks reutilizables
+│   ├── lib/                   # Configuración de librerías externas
+│   ├── pages/                 # Pantallas principales de la aplicación
+│   ├── providers/             # Providers globales
+│   ├── services/              # Manejo de datos y lógica externa
+│   ├── styles/                # Estilos globales y configuraciones
+│   ├── types/                 # Tipados y definiciones TypeScript
+│   ├── utils/                 # Funciones auxiliares
+│   ├── App.tsx                # Configuración de rutas
+│   ├── main.tsx               # Punto de entrada principal
+│   └── index.css              # Estilos globales
+│
+├── .env.example               # Variables de entorno de ejemplo
+├── .gitignore
+├── eslint.config.js
+├── package.json
+├── package-lock.json
+├── README.md
+├── tsconfig.json
+└── vite.config.ts
 
-## Expanding the ESLint configuration
+✍️ Convención de Commits
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Para mantener un historial limpio y organizado, usamos la siguiente convención:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Tipo	Descripción
+FEAT	Nuevas funcionalidades
+FIX	Corrección de errores
+STYLE	Cambios visuales o de estilos
+REFACTOR	Mejoras internas del código
+DOCS	Cambios en documentación
+TEST	Pruebas o testing
+CHORE	Configuración o mantenimiento
+CREATE COMPONENT	Creación de componentes nuevos
