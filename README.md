@@ -5,7 +5,7 @@ Revalue is an interactive platform that incentivises recycling through campaigns
 # Vercel Link: https://revalue-2.vercel.app/
 
 
-## Structure
+## Scaffolding
 
 ```
 revalue/
