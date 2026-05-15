@@ -1,64 +1,79 @@
-# 🌱 Revalue
+# Revalue — Monorepo
 
-Revalue es una plataforma interactiva enfocada en incentivar el reciclaje mediante campañas, recompensas y máquinas inteligentes de reciclaje.
+Revalue is an interactive platform that incentivises recycling through campaigns, rewards, and smart recycling machines.
 
-La aplicación permite que marcas o aliados creen campañas sostenibles conectadas a máquinas de reciclaje ubicadas en diferentes puntos de la ciudad, incentivando a los usuarios a reciclar botellas a cambio de beneficios, descuentos o puntos.
+## Structure
 
-✨ Funcionalidades actuales
-🔐 Inicio de sesión y registro de usuarios
-👤 Perfil editable para aliados/marcas
-🏢 Gestión de información de empresa y ubicación
-♻️ Administración de máquinas de reciclaje
-➕ Crear nuevas máquinas
-✏️ Editar y eliminar máquinas
-📍 Visualización de máquinas en mapa interactivo
-🎯 Creación de campañas sostenibles
-🖼️ Subida de imágenes para campañas
-🎨 Personalización de colores de campañas
-🔄 Activar o desactivar campañas
-💾 Persistencia de datos usando LocalStorage
+```
+revalue/
+├── client/          # React + Vite frontend
+│   ├── src/
+│   │   ├── components/
+│   │   ├── config/
+│   │   ├── context/
+│   │   ├── lib/
+│   │   ├── pages/
+│   │   ├── providers/
+│   │   ├── router/
+│   │   └── services/
+│   ├── public/
+│   ├── index.html
+│   └── package.json
+└── server/          # Express + TypeScript backend
+    ├── src/
+    │   ├── config/
+    │   ├── features/
+    │   │   ├── auth/
+    │   │   ├── campaigns/
+    │   │   └── machines/
+    │   └── middlewares/
+    └── package.json
+```
 
-# 🧠 Estructura del Proyecto (Scaffolding)
+## Getting started
+
+Install dependencies for both workspaces:
 
 ```bash
-Revalue/
-├── public/                    # Recursos públicos e imágenes
-│
-├── src/
-│   ├── assets/                # Recursos gráficos y multimedia
-│   ├── components/            # Componentes reutilizables
-│   ├── context/               # Context API y manejo global de estado
-│   ├── hooks/                 # Custom hooks reutilizables
-│   ├── lib/                   # Configuración de librerías externas
-│   ├── pages/                 # Pantallas principales de la aplicación
-│   ├── providers/             # Providers globales
-│   ├── services/              # Manejo de datos y lógica externa
-│   ├── styles/                # Estilos globales y configuraciones
-│   ├── types/                 # Tipados y definiciones TypeScript
-│   ├── utils/                 # Funciones auxiliares
-│   ├── App.tsx                # Configuración de rutas
-│   ├── main.tsx               # Punto de entrada principal
-│   └── index.css              # Estilos globales
-│
-├── .env.example               # Variables de entorno de ejemplo
-├── .gitignore
-├── eslint.config.js
-├── package.json
-├── package-lock.json
-├── README.md
-├── tsconfig.json
-└── vite.config.ts
+npm run install:all
+```
 
-✍️ Convención de Commits
+Run both dev servers in parallel:
 
-Para mantener un historial limpio y organizado, usamos la siguiente convención:
+```bash
+npm run dev
+```
 
-Tipo	Descripción
-FEAT	Nuevas funcionalidades
-FIX	Corrección de errores
-STYLE	Cambios visuales o de estilos
-REFACTOR	Mejoras internas del código
-DOCS	Cambios en documentación
-TEST	Pruebas o testing
-CHORE	Configuración o mantenimiento
-CREATE COMPONENT	Creación de componentes nuevos
+Or run them individually:
+
+```bash
+npm run dev:client   # http://localhost:5173
+npm run dev:server   # http://localhost:3000
+```
+
+## Environment variables
+
+Copy the example files and fill in the values:
+
+```bash
+cp client/.env.example client/.env
+cp server/.env.example server/.env
+```
+
+### client/.env
+
+| Variable | Description |
+|---|---|
+| `VITE_APP_NAME` | Application display name |
+| `VITE_API_URL` | Backend API base URL |
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anonymous key |
+
+### server/.env
+
+| Variable | Description |
+|---|---|
+| `PORT` | Port the server listens on |
+| `JWT_SECRET` | Secret used to sign JWT tokens |
+| `DATABASE_URL` | PostgreSQL connection string |
+| `CLIENT_URL` | Frontend origin (for CORS) |
